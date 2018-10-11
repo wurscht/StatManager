@@ -19,8 +19,6 @@ public class SearchActivity extends AppCompatActivity {
         searchBtn = (Button) findViewById(R.id.search_button);
         searchField = (SearchView) findViewById(R.id.search_field);
 
-
-        
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

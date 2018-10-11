@@ -15,4 +15,10 @@ public class OverwatchApiParser {
 
         return profile;
     }
+
+    public static Profile parseSingleProfile(String stringProfile) throws JSONException {
+        JSONObject jsonProfile = new JSONObject(stringProfile);
+
+        return parseSingleProfile(jsonProfile);
+    }
 }

@@ -11,6 +11,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -18,6 +19,7 @@ import com.example.jonas.statmanager.helper.OverwatchApiParser;
 import com.example.jonas.statmanager.model.Profile;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -36,7 +38,22 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void loadSpecificProfile(String url) {
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        RequestQueue queue = Volley.newRequestQueue(this);
+        /*JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Profile specific_profile = OverwatchApiParser.parseSingleProfile(response);
+                    TextView username_field = (TextView) findViewById(R.id.username_field);
+                    username_field.setText(specific_profile.getUsername());
+
+                } catch (JSONException e) {
+                    generateAlertDialog();
+                }
+            }
+        }*/
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

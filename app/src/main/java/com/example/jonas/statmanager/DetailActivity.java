@@ -38,9 +38,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void loadSpecificProfile(String url) {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        /*JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null, new Response.Listener<JSONObject>() {
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -52,9 +52,9 @@ public class DetailActivity extends AppCompatActivity {
                     generateAlertDialog();
                 }
             }
-        }*/
+        }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        /*StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -67,13 +67,13 @@ public class DetailActivity extends AppCompatActivity {
                             generateAlertDialog();
                         }
                     }
-                }, new Response.ErrorListener() {
+                }*/, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 generateAlertDialog();
             }
         });
-        queue.add(stringRequest);
+        queue.add(jsonObjReq);
     }
 
     private void generateAlertDialog() {

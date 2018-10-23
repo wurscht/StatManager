@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button redirectBtn = (Button)findViewById(R.id.redirect_button);
+        Button redirectBtn = (Button)findViewById(R.id.ow_button);
         redirectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

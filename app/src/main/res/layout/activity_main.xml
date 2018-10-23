@@ -135,7 +135,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/StatManager_Logo" />
+        app:srcCompat="@drawable/stat_manager_logo" />
 
     <ImageButton
         android:id="@+id/ow_button"
@@ -150,7 +150,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:srcCompat="@drawable/logoOW"
-        tools:srcCompat="@drawable/OWIcon" />
+        app:srcCompat="@drawable/logo_ow"
+        tools:srcCompat="@drawable/ow_icon" />
 
 </android.support.constraint.ConstraintLayout>

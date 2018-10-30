@@ -18,7 +18,8 @@ public class OverwatchApiParser {
         profile.setLevel(jsonProfile.getInt("level"));
         profile.setRating(jsonProfile.getInt("rating"));
         profile.setGamesWon(jsonProfile.getInt("gamesWon"));
-        profile.setDamageDoneAvg(jsonProfile.getJSONObject("competitiveStats").getInt("damageDoneAvg"));
+        profile.setPlayed(jsonProfile.getJSONObject("competitiveStats").getJSONObject("games").getInt("played"));
+        profile.setWon(jsonProfile.getJSONObject("competitiveStats").getJSONObject("games").getInt("won"));
 
         return profile;
     }

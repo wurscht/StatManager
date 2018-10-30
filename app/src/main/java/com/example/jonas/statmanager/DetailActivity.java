@@ -44,41 +44,45 @@ public class DetailActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Profile profile = OverwatchApiParser.parseSingleProfile(response);
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Profile profile = OverwatchApiParser.parseSingleProfile(response);
 
-                    ImageView player_icon_field = (ImageView) findViewById(R.id.player_icon);
-                    TextView username_field = (TextView) findViewById(R.id.username_field);
-                    TextView level_field = (TextView) findViewById(R.id.level_field);
-                    TextView rating_field = (TextView) findViewById(R.id.rating_field);
-                    TextView games_won_field = (TextView) findViewById(R.id.games_won_field);
-                    TextView damage_done_avg = (TextView) findViewById(R.id.damage_done_avg_field);
+                            ImageView player_icon_field = (ImageView) findViewById(R.id.player_icon);
+                            TextView username_field = (TextView) findViewById(R.id.username_field);
+                            TextView level_field = (TextView) findViewById(R.id.level_field);
+                            TextView rating_field = (TextView) findViewById(R.id.rating_field);
+                            TextView games_won_field = (TextView) findViewById(R.id.games_won_field);
+                            TextView played_field = (TextView) findViewById(R.id.played_field);
+                            TextView won_field = (TextView) findViewById(R.id.won_field);
 
-                    Picasso.get().load(profile.getIcon()).into(player_icon_field);
+                            Picasso.get().load(profile.getIcon()).into(player_icon_field);
 
-                    username_field.setText(String.format(Locale.getDefault(), "Username: %s",
-                            profile.getUsername()
-                    ));
-                    level_field.setText(String.format(Locale.getDefault(), "Level: %s",
-                            profile.getLevel()
-                    ));
-                    rating_field.setText(String.format(Locale.getDefault(), "Rating: %s",
-                            profile.getRating()
-                    ));
-                    games_won_field.setText(String.format(Locale.getDefault(), "Games won: %s",
-                            profile.getGamesWon()
-                    ));
-                    damage_done_avg.setText(String.format(Locale.getDefault(), "Average damage done: %s",
-                            profile.getDamageDoneAvg()
-                    ));
+                            username_field.setText(String.format(Locale.getDefault(), "Username: %s",
+                                    profile.getUsername()
+                            ));
+                            level_field.setText(String.format(Locale.getDefault(), "Level: %s",
+                                    profile.getLevel()
+                            ));
+                            rating_field.setText(String.format(Locale.getDefault(), "Rating: %s",
+                                    profile.getRating()
+                            ));
+                            games_won_field.setText(String.format(Locale.getDefault(), "Games won: %s",
+                                    profile.getGamesWon()
+                            ));
+                            played_field.setText(String.format(Locale.getDefault(), "Competitive games played: %s",
+                                    profile.getPlayed()
+                            ));
+                            won_field.setText(String.format(Locale.getDefault(), "Competitive games won: %s",
+                                    profile.getWon()
+                            ));
 
-                } catch (Exception e) {
-                    generateAlertDialog(e.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
+                        } catch (Exception e) {
+                            generateAlertDialog(e.toString());
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 generateAlertDialog(error.toString());

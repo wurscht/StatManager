@@ -6,7 +6,8 @@ public class Profile {
     private Integer level;
     private Integer rating;
     private Integer gamesWon;
-    private Integer damageDoneAvg;
+    private Integer played;
+    private Integer won;
 
     public Profile (String username) {
         this.username = username;
@@ -48,7 +49,11 @@ public class Profile {
         this.gamesWon = gamesWon;
     }
 
-    public Integer getDamageDoneAvg() { return damageDoneAvg; }
+    public Integer getPlayed() { return played; }
 
-    public void setDamageDoneAvg(Integer damageDoneAvg) { this.damageDoneAvg = damageDoneAvg; }
+    public void setPlayed(Integer played) { this.played = played; }
+
+    public Integer getWon() { return won; }
+
+    public void setWon(Integer won) { this.won = won; }
 }

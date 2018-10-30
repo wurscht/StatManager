@@ -37,19 +37,21 @@ public class ApiGetter {
             post.addHeader( "TRN-Api-Key" , "888d5dd1-9cf5-41f9-a3cd-54d99edc079a" );
             try {
                 HttpResponse response = httpclient.execute(post);
-                HttpEntity entity = response.getEntity();
+                if (response != null) {
+                    HttpEntity entity = response.getEntity();
 
-                if (entity != null) {
-                    String retSrc = EntityUtils.toString(entity);
-                    // parsing JSON
-                    JSONObject result = new JSONObject(retSrc); //Convert String to JSON Object
+                    if (entity != null) {
+                        String retSrc = EntityUtils.toString(entity);
+                        // parsing JSON
+                        JSONObject result = new JSONObject(retSrc); //Convert String to JSON Object
 
-                    JSONArray tokenList = result.getJSONArray("names");
-                    JSONObject oj = tokenList.getJSONObject(0);
-                    String token = oj.getString("name");
+                        JSONArray tokenList = result.getJSONArray("names");
+                        JSONObject oj = tokenList.getJSONObject(0);
+                        String token = oj.getString("name");
 
-                    Log.d("tag", oj.toString(4));
-                    Log.d("Tag", token);
+                        Log.d("tag", oj.toString(4));
+                        Log.d("Tag", token);
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

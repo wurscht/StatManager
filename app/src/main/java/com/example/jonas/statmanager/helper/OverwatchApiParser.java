@@ -11,7 +11,14 @@ public class OverwatchApiParser {
 
     public static Profile parseSingleProfile(JSONObject jsonProfile) throws JSONException {
         // Create a new Profile object and fill the attributes from the API in.
-        Profile profile = new Profile(Integer.parseInt(jsonProfile.getString("id")), jsonProfile.getString("username"));
+        Profile profile = new Profile(jsonProfile.getString("name"));
+
+        profile.setEndorsement(jsonProfile.getInt("endorsement"));
+        profile.setLevel(jsonProfile.getInt("level"));
+        profile.setEndorsement(jsonProfile.getInt("endorsement"));
+        profile.setGamesWon(jsonProfile.getInt("gamesWon"));
+        profile.setPrestige(jsonProfile.getInt("prestige"));
+        profile.setPriv(jsonProfile.getBoolean("private"));
 
         return profile;
     }

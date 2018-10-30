@@ -5,25 +5,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.ImageView;
 import android.support.v7.app.AlertDialog;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.example.jonas.statmanager.helper.OverwatchApiParser;
 import com.example.jonas.statmanager.model.Profile;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.Locale;
+import java.net.URL;
 
 public class DetailActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,6 @@ public class DetailActivity extends AppCompatActivity {
         String overwatchApiUrl = "https://ow-api.com/v1/stats/pc/eu/";
 
         loadSpecificProfile(overwatchApiUrl + username + "/profile");
-        //loadSpecificProfile(overwatchApiUrl +"/1");
     }
 
     private void loadSpecificProfile(String url) {
@@ -44,39 +45,31 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Profile specific_profile = OverwatchApiParser.parseSingleProfile(response);
+                    Profile profile = OverwatchApiParser.parseSingleProfile(response);
                     TextView username_field = (TextView) findViewById(R.id.username_field);
-                    username_field.setText(specific_profile.getUsername());
-
-                } catch (JSONException e) {
-                    generateAlertDialog();
+                    username_field.setText(String.format(Locale.getDefault(), "Username: %s\nEndorsement: %d\nLevel: %d\nGames won: %d\nPrestige: %d\nPrivate: %s",
+                            profile.getUsername(),
+                            profile.getEndorsement(),
+                            profile.getLevel(),
+                            profile.getGamesWon(),
+                            profile.getPrestige(),
+                            profile.getPriv()
+                    ));
+                } catch (Exception e) {
+                    generateAlertDialog(e.toString());
                 }
             }
-        }
-
-        /*StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            Profile specific_profile = OverwatchApiParser.parseSingleProfile(response);
-                            TextView username_field = (TextView) findViewById(R.id.username_field);
-                            username_field.setText(specific_profile.getUsername());
-
-                        } catch (JSONException e) {
-                            generateAlertDialog();
-                        }
-                    }
-                }*/, new Response.ErrorListener() {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                generateAlertDialog();
+                generateAlertDialog(error.toString());
             }
         });
+
         queue.add(jsonObjReq);
     }
 
-    private void generateAlertDialog() {
+    private void generateAlertDialog(String error) {
         AlertDialog.Builder dialogBuilder;
         dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -84,8 +77,7 @@ public class DetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        dialogBuilder.setMessage("The profile could not be loaded. Try again later.").setTitle("Error");
+        dialogBuilder.setMessage("The profile could not be loaded: " + error).setTitle("Error");
         AlertDialog dialog = dialogBuilder.create();
         dialog.show();
     }

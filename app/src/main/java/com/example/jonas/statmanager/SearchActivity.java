@@ -18,6 +18,10 @@ public class SearchActivity extends AppCompatActivity {
 
         searchBtn = (Button) findViewById(R.id.search_button);
         searchField = (SearchView) findViewById(R.id.search_field);
+        searchBtn.setText("search");
+
+        // add a default query for the sake of not having to enter it every time.
+        searchField.setQuery("Ithildin-2938", false);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,7 +30,6 @@ public class SearchActivity extends AppCompatActivity {
                 String input = searchField.getQuery().toString();
                 intent.putExtra("username", input);
                 startActivity(intent);
-
             }
         });
     }

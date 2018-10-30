@@ -20,8 +20,11 @@ import com.android.volley.toolbox.Volley;
 
 import com.example.jonas.statmanager.helper.OverwatchApiParser;
 import com.example.jonas.statmanager.model.Profile;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.util.Locale;
 import java.net.URL;
 
@@ -32,7 +35,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
-        //String overwatchApiUrl = "https://api.punkapi.com/v2/beers";
         String overwatchApiUrl = "https://ow-api.com/v1/stats/pc/eu/";
 
         loadSpecificProfile(overwatchApiUrl + username + "/profile");
@@ -46,15 +48,32 @@ public class DetailActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Profile profile = OverwatchApiParser.parseSingleProfile(response);
+
+                    ImageView player_icon_field = (ImageView) findViewById(R.id.player_icon);
                     TextView username_field = (TextView) findViewById(R.id.username_field);
-                    username_field.setText(String.format(Locale.getDefault(), "Username: %s\nEndorsement: %d\nLevel: %d\nGames won: %d\nPrestige: %d\nPrivate: %s",
-                            profile.getUsername(),
-                            profile.getEndorsement(),
-                            profile.getLevel(),
-                            profile.getGamesWon(),
-                            profile.getPrestige(),
-                            profile.getPriv()
+                    TextView level_field = (TextView) findViewById(R.id.level_field);
+                    TextView rating_field = (TextView) findViewById(R.id.rating_field);
+                    TextView games_won_field = (TextView) findViewById(R.id.games_won_field);
+                    TextView damage_done_avg = (TextView) findViewById(R.id.damage_done_avg_field);
+
+                    Picasso.get().load(profile.getIcon()).into(player_icon_field);
+
+                    username_field.setText(String.format(Locale.getDefault(), "Username: %s",
+                            profile.getUsername()
                     ));
+                    level_field.setText(String.format(Locale.getDefault(), "Level: %s",
+                            profile.getLevel()
+                    ));
+                    rating_field.setText(String.format(Locale.getDefault(), "Rating: %s",
+                            profile.getRating()
+                    ));
+                    games_won_field.setText(String.format(Locale.getDefault(), "Games won: %s",
+                            profile.getGamesWon()
+                    ));
+                    damage_done_avg.setText(String.format(Locale.getDefault(), "Average damage done: %s",
+                            profile.getDamageDoneAvg()
+                    ));
+
                 } catch (Exception e) {
                     generateAlertDialog(e.toString());
                 }

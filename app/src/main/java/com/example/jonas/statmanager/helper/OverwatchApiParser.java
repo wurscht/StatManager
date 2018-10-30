@@ -13,12 +13,12 @@ public class OverwatchApiParser {
         // Create a new Profile object and fill the attributes from the API in.
         Profile profile = new Profile(jsonProfile.getString("name"));
 
-        profile.setEndorsement(jsonProfile.getInt("endorsement"));
+        profile.setIcon(jsonProfile.getString("icon"));
+        profile.setUsername(jsonProfile.getString("name"));
         profile.setLevel(jsonProfile.getInt("level"));
-        profile.setEndorsement(jsonProfile.getInt("endorsement"));
+        profile.setRating(jsonProfile.getInt("rating"));
         profile.setGamesWon(jsonProfile.getInt("gamesWon"));
-        profile.setPrestige(jsonProfile.getInt("prestige"));
-        profile.setPriv(jsonProfile.getBoolean("private"));
+        profile.setDamageDoneAvg(jsonProfile.getJSONObject("competitiveStats").getInt("damageDoneAvg"));
 
         return profile;
     }

@@ -21,7 +21,7 @@ public class SearchActivity extends AppCompatActivity {
         searchBtn.setText("search");
 
         // add a default query for the sake of not having to enter it every time.
-        searchField.setQuery("Ithildin-2938", false);
+        searchField.setQuery("Schweizaner-2418", false);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -152,7 +152,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:srcCompat="@drawable/logo_ow"
+        app:srcCompat="@drawable/ow_icon"
         tools:srcCompat="@drawable/ow_icon" />
 
     <ImageButton

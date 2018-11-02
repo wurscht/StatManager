@@ -15,7 +15,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ImageView
+        ImageView logoBtn = (ImageView)findViewById(R.id.logo);
+        logoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+            }
+        });
+
+        ImageButton fnBtn = (ImageButton)findViewById(R.id.fortnite_button);
 
         ImageButton owBtn = (ImageButton)findViewById(R.id.ow_button);
         owBtn.setOnClickListener(new View.OnClickListener() {

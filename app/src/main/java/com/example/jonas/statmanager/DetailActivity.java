@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +31,8 @@ import java.util.Locale;
 import java.net.URL;
 
 public class DetailActivity extends AppCompatActivity {
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,16 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String overwatchApiUrl = "https://ow-api.com/v1/stats/pc/eu/";
+        progressBar = (ProgressBar)findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        ImageView logoBtn = (ImageView)findViewById(R.id.logo);
+        logoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DetailActivity.this, MainActivity.class));
+            }
+        });
 
         loadSpecificProfile(overwatchApiUrl + username + "/profile");
     }

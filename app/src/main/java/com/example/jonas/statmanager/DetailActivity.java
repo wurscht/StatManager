@@ -73,22 +73,22 @@ public class DetailActivity extends AppCompatActivity {
 
                             Picasso.get().load(profile.getIcon()).into(player_icon_field);
 
-                            username_field.setText(String.format(Locale.getDefault(), "Username: %s",
+                            username_field.setText(String.format(Locale.getDefault(), "Username:\n%s",
                                     profile.getUsername()
                             ));
-                            level_field.setText(String.format(Locale.getDefault(), "Level: %s",
+                            level_field.setText(String.format(Locale.getDefault(), "Level:\n%s",
                                     profile.getLevel()
                             ));
-                            rating_field.setText(String.format(Locale.getDefault(), "Rating: %s",
+                            rating_field.setText(String.format(Locale.getDefault(), "Rating:\n%s",
                                     profile.getRating()
                             ));
-                            games_won_field.setText(String.format(Locale.getDefault(), "Games won: %s",
+                            games_won_field.setText(String.format(Locale.getDefault(), "Games won:\n%s",
                                     profile.getGamesWon()
                             ));
-                            played_field.setText(String.format(Locale.getDefault(), "Competitive games played: %s",
+                            played_field.setText(String.format(Locale.getDefault(), "Competitive games played:\n%s",
                                     profile.getPlayed()
                             ));
-                            won_field.setText(String.format(Locale.getDefault(), "Competitive games won: %s",
+                            won_field.setText(String.format(Locale.getDefault(), "Competitive games won:\n%s",
                                     profile.getWon()
                             ));
 

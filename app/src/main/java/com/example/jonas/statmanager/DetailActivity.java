@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.jonas.statmanager.helper.Favorites;
 import com.example.jonas.statmanager.helper.OverwatchApiParser;
 import com.example.jonas.statmanager.model.Profile;
 import com.squareup.picasso.Picasso;
@@ -38,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
+        final String username = intent.getStringExtra("username");
         String overwatchApiUrl = "https://ow-api.com/v1/stats/pc/eu/";
         progressBar = (ProgressBar)findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
@@ -48,6 +49,15 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DetailActivity.this, MainActivity.class));
+            }
+        });
+
+        ImageView favorite_user = (ImageView) findViewById(R.id.favorite);
+        final Favorites favorites = new Favorites();
+        favorite_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                favorites.saveFav(username, "Overwatch");
             }
         });
 

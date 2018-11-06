@@ -28,8 +28,8 @@ public class Favorites {
         }
     }
 
-    public void saveFav(Profile user, ApiGetter.Game game) throws FileNotFoundException, UnsupportedEncodingException {
-        String favorites = game + "; " + user.getUsername() + "\n";
+    public void saveFav(String userName, String game){
+        String favorites = game + "; " + userName + "\n";
         writer.println(favorites);
         System.out.println(favorites);
         writer.close();

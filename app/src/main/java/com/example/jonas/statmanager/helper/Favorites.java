@@ -30,9 +30,10 @@ public class Favorites {
 
     public void saveFav(String userName, String game){
         String favorites = game + "; " + userName + "\n";
-        writer.println(favorites);
         System.out.println(favorites);
-        writer.close();
+
+        /*writer.println(favorites);
+        writer.close();*/
     }
 
     public ArrayList<String> getFavorites() throws IOException {

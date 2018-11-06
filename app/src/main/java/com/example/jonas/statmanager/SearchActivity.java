@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 public class SearchActivity extends AppCompatActivity {
-    Button searchBtn;
     SearchView searchField;
 
     @Override
@@ -25,7 +24,8 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        searchBtn = (Button) findViewById(R.id.search_button);
+        Button searchBtn = (Button) findViewById(R.id.search_button);
+
         searchField = (SearchView) findViewById(R.id.search_field);
         searchBtn.setText("search");
 
@@ -39,6 +39,15 @@ public class SearchActivity extends AppCompatActivity {
                 String input = searchField.getQuery().toString();
                 intent.putExtra("username", input);
                 startActivity(intent);
+            }
+        });
+
+        Button favoriteBtn = (Button) findViewById(R.id.favorite_button);
+
+        favoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SearchActivity.this, FavoriteActivity.class));
             }
         });
     }

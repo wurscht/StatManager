@@ -10,9 +10,6 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import android.support.v7.app.AlertDialog;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,16 +17,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.example.jonas.statmanager.helper.Favorites;
+import com.example.jonas.statmanager.model.Favorite;
 import com.example.jonas.statmanager.helper.OverwatchApiParser;
 import com.example.jonas.statmanager.model.Profile;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.Locale;
-import java.net.URL;
 
 public class DetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
@@ -53,11 +48,11 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         ImageView favorite_user = (ImageView) findViewById(R.id.favorite);
-        final Favorites favorites = new Favorites();
         favorite_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                favorites.saveFav(username, "Overwatch");
+                final Favorite favorite = new Favorite(username);
+                favorite.saveFav(favorite.getUsername(), "Overwatch");
             }
         });
 

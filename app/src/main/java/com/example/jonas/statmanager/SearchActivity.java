@@ -15,8 +15,11 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
         ImageView logoBtn = (ImageView)findViewById(R.id.logo);
+        searchField = (SearchView) findViewById(R.id.search_field);
+        Button searchBtn = (Button) findViewById(R.id.search_button);
+        Button favoriteBtn = (Button)findViewById(R.id.favorite_button);
+
         logoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,9 +27,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        Button searchBtn = (Button) findViewById(R.id.search_button);
 
-        searchField = (SearchView) findViewById(R.id.search_field);
         searchBtn.setText("search");
 
         // add a default query for the sake of not having to enter it every time.
@@ -41,8 +42,6 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        Button favoriteBtn = (Button) findViewById(R.id.favorite_button);
 
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override

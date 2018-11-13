@@ -20,24 +20,26 @@ import java.util.List;
 
 
 public class FavoriteActivity extends AppCompatActivity {
-    private ImageView favorite_user = (ImageView) findViewById(R.id.favorite);
     private ProgressBar progressBar;
-    private ImageView logoBtn = (ImageView)findViewById(R.id.logo);
+    private ImageView logoBtn;
     private ListView allFavs;
     private List<String> allFavorites = new ArrayList<>();
     private BufferedWriter bw = null;
     private BufferedReader br;
     FileWriter fw = null;
-    private List<String> listFavorites = new ArrayList<>();
-    private static final String file = System.getProperty("user.dir") + "favorites.txt";
+    private List<String> listFavorites;
+    private static String file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
 
+        logoBtn = (ImageView)findViewById(R.id.logo);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
+
+        file = System.getProperty("user.dir") + "favorites.txt";
 
         logoBtn.setOnClickListener(new View.OnClickListener() {
             @Override

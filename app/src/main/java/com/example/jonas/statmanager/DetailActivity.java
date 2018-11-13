@@ -73,29 +73,29 @@ public class DetailActivity extends AppCompatActivity {
                             TextView level_field = (TextView) findViewById(R.id.level_field);
                             TextView rating_field = (TextView) findViewById(R.id.rating_field);
                             TextView games_won_field = (TextView) findViewById(R.id.games_won_field);
-                            TextView played_field = (TextView) findViewById(R.id.played_field);
-                            TextView won_field = (TextView) findViewById(R.id.won_field);
+                            // TextView played_field = (TextView) findViewById(R.id.played_field);
+                            // TextView won_field = (TextView) findViewById(R.id.won_field);
 
                             Picasso.get().load(profile.getIcon()).into(player_icon_field);
 
-                            username_field.setText(String.format(Locale.getDefault(), "Username:\n%s",
+                            username_field.setText(String.format(Locale.getDefault(), "Username: %s",
                                     profile.getUsername()
                             ));
-                            level_field.setText(String.format(Locale.getDefault(), "Level:\n%s",
+                            level_field.setText(String.format(Locale.getDefault(), "Level: %s",
                                     profile.getLevel()
                             ));
-                            rating_field.setText(String.format(Locale.getDefault(), "Rating:\n%s",
+                            rating_field.setText(String.format(Locale.getDefault(), "Rating: %s",
                                     profile.getRating()
                             ));
-                            games_won_field.setText(String.format(Locale.getDefault(), "Games won:\n%s",
+                            games_won_field.setText(String.format(Locale.getDefault(), "Games won: %s",
                                     profile.getGamesWon()
                             ));
-                            played_field.setText(String.format(Locale.getDefault(), "Competitive games played:\n%s",
+                            /*played_field.setText(String.format(Locale.getDefault(), "Competitive games played:\n%s",
                                     profile.getPlayed()
                             ));
                             won_field.setText(String.format(Locale.getDefault(), "Competitive games won:\n%s",
                                     profile.getWon()
-                            ));
+                            ));*/
 
                         } catch (Exception e) {
                             generateAlertDialog(e.toString());

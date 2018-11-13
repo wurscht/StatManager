@@ -17,7 +17,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.example.jonas.statmanager.model.Favorite;
 import com.example.jonas.statmanager.helper.OverwatchApiParser;
 import com.example.jonas.statmanager.model.Profile;
 import com.squareup.picasso.Picasso;
@@ -51,8 +50,8 @@ public class DetailActivity extends AppCompatActivity {
         favorite_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Favorite favorite = new Favorite(username);
-                favorite.saveFav(favorite.getUsername(), "Overwatch");
+                FavoriteActivity favorite = new FavoriteActivity();
+                favorite.saveFav(username, "Overwatch");
                 favorite_user.setImageResource(R.drawable.star_favorite);
 
             }

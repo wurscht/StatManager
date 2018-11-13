@@ -5,19 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
-import com.example.jonas.statmanager.model.Favorite;
-
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +27,7 @@ public class FavoriteActivity extends AppCompatActivity {
     private List<String> allFavorites = new ArrayList<>();
     private BufferedWriter bw = null;
     private BufferedReader br;
+    FileWriter fw = null;
     private List<String> listFavorites = new ArrayList<>();
     private static final String file = System.getProperty("user.dir") + "favorites.txt";
 
@@ -56,10 +53,9 @@ public class FavoriteActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         System.out.println("456");
 
-        loadAllFavorites(allFavorites);
+        //loadAllFavorites(allFavorites);
         System.out.println("789");
         allFavs = (ListView) findViewById(R.id.list_all_favorites);
         System.out.println("012");
@@ -87,7 +83,33 @@ public class FavoriteActivity extends AppCompatActivity {
         return listFavorites;
     }
 
-    private void loadAllFavorites(List<String> allFavorites)
+    public void saveFav(String userName, String game){
+        String favoritesContent = game + ";" + userName + "\n";
+        System.out.println(favoritesContent);
+        System.out.println(file);
+
+        try {
+            fw = new FileWriter(file);
+            bw = new BufferedWriter(fw);
+            bw.write(favoritesContent);
+            System.out.println("Done writing");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bw != null)
+                    bw.close();
+                if (fw != null)
+                    fw.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+
+    //Load the favorites in list
+    /*private void loadAllFavorites(List<String> allFavorites)
     {
         final ArrayAdapter<String> favoritesArrayAdapter = new
                 ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
@@ -110,6 +132,6 @@ public class FavoriteActivity extends AppCompatActivity {
             };
             // Set on item click listener to the list view
             favoritesList.setOnItemClickListener(itemListClickedHandler);
-    }
+    }*/
 
 }

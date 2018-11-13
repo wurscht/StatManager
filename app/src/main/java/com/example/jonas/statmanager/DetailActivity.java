@@ -47,12 +47,14 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        ImageView favorite_user = (ImageView) findViewById(R.id.favorite);
+        final ImageView favorite_user = (ImageView) findViewById(R.id.favorite);
         favorite_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Favorite favorite = new Favorite(username);
                 favorite.saveFav(favorite.getUsername(), "Overwatch");
+                favorite_user.setImageResource(R.drawable.star_favorite);
+
             }
         });
 

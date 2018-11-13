@@ -1,13 +1,15 @@
 package com.example.jonas.statmanager.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Profile {
     private String icon;
     private String username;
     private Integer level;
     private Integer rating;
     private Integer gamesWon;
-    private Integer played;
-    private Integer won;
+    private List<Profile> favorites = new ArrayList<Profile>();
 
     public Profile (String username) {
         this.username = username;
@@ -49,11 +51,7 @@ public class Profile {
         this.gamesWon = gamesWon;
     }
 
-    public Integer getPlayed() { return played; }
+    public List<Profile> getFavorites() { return favorites; }
 
-    public void setPlayed(Integer played) { this.played = played; }
-
-    public Integer getWon() { return won; }
-
-    public void setWon(Integer won) { this.won = won; }
+    public void setFavorites(List<Profile> favorites) { this.favorites = favorites; }
 }

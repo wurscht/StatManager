@@ -46,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SearchActivity.this, FavoriteActivity.class));
+                startActivity(new Intent(SearchActivity.this, FavouriteActivity.class));
             }
         });
     }

@@ -50,8 +50,8 @@ public class DetailActivity extends AppCompatActivity {
         favorite_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavoriteActivity favorite = new FavoriteActivity();
-                favorite.saveFav(username, "Overwatch");
+                FavouriteActivity favorite = new FavouriteActivity();
+                favorite.saveToFile(username, "Overwatch");
                 favorite_user.setImageResource(R.drawable.star_favorite);
 
             }

@@ -1,9 +1,7 @@
 package com.example.jonas.statmanager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,15 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class FavouriteActivity extends AppCompatActivity {
@@ -32,6 +31,7 @@ public class FavouriteActivity extends AppCompatActivity {
     TextView txtContent;
     final static String file = System.getProperty("user.dir") + "favorites.txt" ;
     final static String TAG = "sth";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +48,6 @@ public class FavouriteActivity extends AppCompatActivity {
         });
 
         Log.i("My app","sdf" + file + "LOREMMM IPSUUMM");
-        /*try {
-            favourites = getFavourites();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-
     }
 
     private List<String> getFavourites() throws IOException {
@@ -102,7 +95,47 @@ public class FavouriteActivity extends AppCompatActivity {
         return line;
     }
 
-    public static boolean saveToFile( String userName, String game){
+    public void saveToFile(String userName, String game, Context context){
+        String text = userName + ";" + game;
+
+        File yourFile = new File(context.getFilesDir().getPath().toString() + file);
+        if(!yourFile.exists()) {
+            try {
+                yourFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            FileOutputStream oFile = new FileOutputStream(yourFile, false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        /*PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(context.getFilesDir().getPath().toString() + file, "UTF-8");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        writer.println("The first line");
+        writer.println("The second line");
+        writer.close();*/
+
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("favorites.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(text);
+            outputStreamWriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean saveToFile_old( String userName, String game){
         String text = userName + ";" + game;
         try {
             File txt = new File(file);
@@ -119,7 +152,5 @@ public class FavouriteActivity extends AppCompatActivity {
             Log.d(TAG, ex.getMessage());
         }
         return  false;
-
-
     }
 }

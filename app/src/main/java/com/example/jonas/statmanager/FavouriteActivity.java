@@ -20,18 +20,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavouriteActivity extends AppCompatActivity {
     ImageView logoBtn;
     List<String> favoriteList;
     List<String> favourites;
-    BufferedReader br;
+    BufferedReader reader;
     EditText txtInput;
     TextView txtContent;
     final static String file = System.getProperty("user.dir") + "favorites.txt" ;
     final static String TAG = "sth";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +52,25 @@ public class FavouriteActivity extends AppCompatActivity {
 
     private List<String> getFavourites() throws IOException {
         try {
-            br = new BufferedReader(new FileReader(file));
+            reader = new BufferedReader(new FileReader(file));
+            String text;
+            List<Integer> list = new ArrayList<Integer>();
+
+            while ((text = reader.readLine()) != null) {
+                list.add(Integer.parseInt(text));
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+            }
         }
-
-        String st = new String();
-        while ((st = br.readLine()) != null) {
-            System.out.println(st);
-            favoriteList.add(st);
-        }
-        return favoriteList;
 
     }
 

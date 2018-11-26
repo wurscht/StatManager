@@ -25,6 +25,8 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".FavoriteActivity" />
         <activity android:name=".FavouriteActivity" />
+        <activity android:name=".SearchFortniteActivity"/>
+        <activity android:name=".DetailFortniteActivity"/>
 
     </application>
 

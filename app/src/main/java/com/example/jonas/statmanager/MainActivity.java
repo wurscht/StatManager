@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ImageButton fnBtn = (ImageButton)findViewById(R.id.fortnite_button);
+        fnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SearchFortniteActivity.class));
+            }
+        });
 
         ImageButton owBtn = (ImageButton)findViewById(R.id.ow_button);
         owBtn.setOnClickListener(new View.OnClickListener() {

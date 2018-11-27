@@ -15,11 +15,19 @@ public class OverwatchApiParser {
 
         profile.setIcon(jsonProfile.getString("icon"));
         profile.setUsername(jsonProfile.getString("name"));
-        profile.setLevel(jsonProfile.getInt("level"));
-        profile.setRating(jsonProfile.getInt("rating"));
-        profile.setGamesWon(jsonProfile.getInt("gamesWon"));
-        //profile.setPlayed(jsonProfile.getJSONObject("competitiveStats").getJSONObject("games").getInt("played"));
-        //profile.setWon(jsonProfile.getJSONObject("competitiveStats").getJSONObject("games").getInt("won"));
+        profile.setLevel(Integer.toString(jsonProfile.getInt("level")));
+        profile.setRating(Integer.toString(jsonProfile.getInt("rating")));
+        profile.setGamesWon(Integer.toString(jsonProfile.getInt("gamesWon")));
+        try{
+            profile.setGamesPlayed(Integer.toString(jsonProfile.getJSONObject("competitiveStats").getJSONObject("games").getInt("played")));
+        }catch (Exception e){
+            profile.setGamesPlayed("N/A");
+        }
+        try{
+            profile.setGamesWon(Integer.toString(jsonProfile.getJSONObject("competitiveStats").getJSONObject("games").getInt("won")));
+        }catch (Exception e) {
+            profile.setGamesWon("N/A");
+        }
 
         return profile;
     }

@@ -6,9 +6,10 @@ import java.util.List;
 public class Profile {
     private String icon;
     private String username;
-    private Integer level;
-    private Integer rating;
-    private Integer gamesWon;
+    private String level;
+    private String rating;
+    private String gamesWon;
+    private String gamesPlayed;
     private List<Profile> favorites = new ArrayList<Profile>();
 
     public Profile (String username) {
@@ -19,6 +20,10 @@ public class Profile {
 
     public String getIcon() { return icon;}
 
+    public void setGamesPlayed(String gamesPlayed) { this.gamesPlayed = gamesPlayed; }
+
+    public String getGamesPlayed() { return gamesPlayed;}
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -27,27 +32,27 @@ public class Profile {
         return username;
     }
 
-    public Integer getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
-    public Integer getGamesWon() {
+    public String getGamesWon() {
         return gamesWon;
     }
 
-    public void setGamesWon(Integer gamesWon) {
+    public void setGamesWon(String gamesWon) {
         this.gamesWon = gamesWon;
     }
 

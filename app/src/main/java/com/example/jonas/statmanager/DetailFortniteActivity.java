@@ -79,6 +79,8 @@ public class DetailFortniteActivity extends AppCompatActivity {
                             TextView rating_field = (TextView) findViewById(R.id.rating_field);
                             TextView games_won_field = (TextView) findViewById(R.id.games_won_field);
                             TextView kd_field = (TextView) findViewById(R.id.kd_field);
+                            TextView kills_field = (TextView) findViewById(R.id.kills_field);
+                            TextView winrate_field = (TextView) findViewById(R.id.winrate_field);
                             // TextView played_field = (TextView) findViewById(R.id.played_field);
                             // TextView won_field = (TextView) findViewById(R.id.won_field);
 
@@ -88,7 +90,7 @@ public class DetailFortniteActivity extends AppCompatActivity {
                             username_field.setText(String.format(Locale.getDefault(), "Username: %s",
                                     profile.getUsername()
                             ));
-                            rating_field.setText(String.format(Locale.getDefault(), "TRN-Rating: %s",
+                            rating_field.setText(String.format(Locale.getDefault(), "Score: %s",
                                     profile.getRating()
                             ));
                             games_won_field.setText(String.format(Locale.getDefault(), "Games won: %s",
@@ -97,7 +99,12 @@ public class DetailFortniteActivity extends AppCompatActivity {
                             kd_field.setText(String.format(Locale.getDefault(), "KD: %s",
                                     profile.getKD()
                             ));
-
+                            kills_field.setText(String.format(Locale.getDefault(), "Kills: %s",
+                                    profile.getKills()
+                            ));
+                            winrate_field.setText(String.format(Locale.getDefault(), "Win rate: %s",
+                                    profile.getWinrate()
+                            ));
                             progressBar.setVisibility(View.INVISIBLE);
 
                         } catch (Exception e) {

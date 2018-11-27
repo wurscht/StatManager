@@ -76,8 +76,7 @@ public class DetailActivity extends AppCompatActivity {
                             TextView level_field = (TextView) findViewById(R.id.level_field);
                             TextView rating_field = (TextView) findViewById(R.id.rating_field);
                             TextView games_won_field = (TextView) findViewById(R.id.games_won_field);
-                            // TextView played_field = (TextView) findViewById(R.id.played_field);
-                            // TextView won_field = (TextView) findViewById(R.id.won_field);
+                            TextView games_played_field = (TextView) findViewById(R.id.games_played_field);
 
                             Picasso.get().load(profile.getIcon()).into(player_icon_field);
 
@@ -93,12 +92,10 @@ public class DetailActivity extends AppCompatActivity {
                             games_won_field.setText(String.format(Locale.getDefault(), "Games won: %s",
                                     profile.getGamesWon()
                             ));
-                            /*played_field.setText(String.format(Locale.getDefault(), "Competitive games played:\n%s",
-                                    profile.getPlayed()
+                            games_played_field.setText(String.format(Locale.getDefault(), "Games played: %s",
+                                    profile.getGamesPlayed()
                             ));
-                            won_field.setText(String.format(Locale.getDefault(), "Competitive games won:\n%s",
-                                    profile.getWon()
-                            ));*/
+                            progressBar.setVisibility(View.INVISIBLE);
 
                         } catch (Exception e) {
                             generateAlertDialog(e.toString());

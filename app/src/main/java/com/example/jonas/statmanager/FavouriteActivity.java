@@ -1,42 +1,25 @@
 package com.example.jonas.statmanager;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.lang.annotation.Native;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FavouriteActivity extends AppCompatActivity {
     ImageView logoBtn;
     ArrayList<String> favoriteList = new ArrayList<String>();
     ArrayList<String> favoriteUsers = new ArrayList<String>();
     BufferedReader reader;
-    final static String TAG = "sth";
+    private final static String TAG = "sth";
+    private ListView favoritesList = (ListView) findViewById(R.id.list_all_favorites);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +35,34 @@ public class FavouriteActivity extends AppCompatActivity {
             }
         });
 
-        Log.i("My app","sdf" + "LOREMMM IPSUUMM");
+
+        //fillList();
+        // Make the elements in the listview "show all" clickable and redirect to detail site
+        favoritesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent appInfo = new Intent(FavouriteActivity.this, DetailActivity.class);
+                startActivity(appInfo);
+            }
+        });
     }
 
-    private List<String> getFavourites() {
+
+    private void fillList(){
+        ArrayList<String> userNames = getFavourites();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                userNames);
+        favoritesList.setAdapter(arrayAdapter);
+
+        arrayAdapter.addAll(favoriteUsers);
+        favoritesList.setAdapter(arrayAdapter);
+
+    }
+
+    private ArrayList<String> getFavourites() {
 
         for ( String str : favoriteList) {
             String[] values = str.split(";");

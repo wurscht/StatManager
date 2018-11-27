@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -26,9 +27,9 @@ public class FavoriteActivity extends AppCompatActivity {
     private List<String> allFavorites = new ArrayList<>();
     private BufferedWriter bw = null;
     private BufferedReader br;
-    FileWriter fw = null;
+    private FileWriter fw = null;
     private List<String> listFavorites;
-    private static String file;
+    private static File file = new File("C:\\Users\\Fuga\\Desktop\\test.txt");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class FavoriteActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
 
-        file = System.getProperty("user.dir") + "favorites.txt";
+        //file = System.getProperty("user.dir") + "favorites.txt";
 
         logoBtn.setOnClickListener(new View.OnClickListener() {
             @Override

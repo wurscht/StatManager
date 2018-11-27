@@ -52,8 +52,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FavouriteActivity favorite = new FavouriteActivity();
-                Context context = getApplicationContext();
-                favorite.saveToFile(username, "Overwatch", context);
+                favorite.saveFavorites(username, "Overwatch");
                 favorite_user.setImageResource(R.drawable.star_favorite);
 
             }

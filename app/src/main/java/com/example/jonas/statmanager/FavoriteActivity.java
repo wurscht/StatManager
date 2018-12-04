@@ -5,36 +5,35 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import com.example.jonas.statmanager.helper.FileManager;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-
+/**
+ * Class to show the content for the favorite activity. The saved player profiles will be listed here.
+ *
+ * @author Jonas Lehmann, Mirjam Doyon, Hava Fuga, Enis Badoglu
+ */
 public class FavoriteActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ImageView logoBtn;
 
-    //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
+    // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
     ListView listItems;
 
     String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StatManager";
     String filePath = path + "/fav.txt";
 
-
+    /**
+     * Method to create the activity and initialize all the needed designs for the gui and the logic
+     * so the user can interact with this activity.
+     *
+     * @param savedInstanceState the savedInstanceState is a reference to a bundle object that is passed
+     *                           into the onCreate method of every android activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +62,8 @@ public class FavoriteActivity extends AppCompatActivity {
             }
         });
 
-        //onclicklistener für jedes Item in den Favoriten noch zu erstellen
+        //Todo: onclicklistener für jedes Item in den Favoriten noch zu erstellen
 
         progressBar.setVisibility(View.INVISIBLE);
     }
-
 }

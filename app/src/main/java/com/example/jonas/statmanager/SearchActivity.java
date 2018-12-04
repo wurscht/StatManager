@@ -8,9 +8,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
+/**
+ * Class to show the content for the search activity of the game overwatch. On this activity profiles of players can be searched.
+ *
+ * @author Jonas Lehmann, Mirjam Doyon, Hava Fuga, Enis Badoglu
+ */
 public class SearchActivity extends AppCompatActivity {
     SearchView searchField;
 
+    /**
+     * Method to create the activity and initialize all the needed designs for the gui and the logic
+     * so the user can interact with this activity.
+     *
+     * @param savedInstanceState the savedInstanceState is a reference to a bundle object that is passed
+     *                           into the onCreate method of every android activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +38,6 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(new Intent(SearchActivity.this, MainActivity.class));
             }
         });
-
 
         searchBtn.setText("search");
 
@@ -46,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SearchActivity.this, FavouriteActivity.class));
+                startActivity(new Intent(SearchActivity.this, FavoriteActivity.class));
             }
         });
     }

@@ -1,7 +1,5 @@
 package com.example.jonas.statmanager.helper;
 
-import android.os.Environment;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,8 +8,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Class to handle the saving of the favorite profiles to a file.
+ *
+ * @author Jonas Lehmann, Mirjam Doyon, Hava Fuga, Enis Badoglu
+ */
 public class FileManager {
 
+    /**
+     * Method to save a profiles to the file.
+     *
+     * @param file the file where the profil should be saved
+     * @param data the data that should be saved in the file
+     */
     public static void Save(File file, String[] data)
     {
         FileOutputStream fos = null;
@@ -45,7 +54,12 @@ public class FileManager {
         }
     }
 
-
+    /**
+     * Method to load profiles from the file.
+     *
+     * @param file the file where the profiles should be loaded from
+     * @return the data of the profiles in the file as an array of strings
+     */
     public static String[] Load(File file)
     {
         FileInputStream fis = null;

@@ -1,15 +1,23 @@
 package com.example.jonas.statmanager.helper;
 
-
 import com.example.jonas.statmanager.model.FortniteProfile;
-import com.example.jonas.statmanager.model.Profile;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * Class to parse the data from the Fortnite API to show it in the detail activity.
+ *
+ * @author Jonas Lehmann, Mirjam Doyon, Hava Fuga, Enis Badoglu
+ */
 public class FortniteApiParser {
 
+    /**
+     * A method to get a single FortniteProfile object from a JSONObject to show the stats.
+     *
+     * @param jsonProfile the profile of the player in JSON format
+     * @return the profile of the player as an FortniteProfile object
+     * @throws JSONException
+     */
     public static FortniteProfile parseSingleProfile(JSONObject jsonProfile) throws JSONException {
         // Create a new Profile object and fill the attributes from the API in.
         FortniteProfile profile = new FortniteProfile(jsonProfile.getString("epicUserHandle"));
@@ -30,49 +38,17 @@ public class FortniteApiParser {
         profile.setKills(jsonProfile.getJSONArray("lifeTimeStats").getJSONObject(10).getString("value"));
 
         profile.setWinrate(jsonProfile.getJSONArray("lifeTimeStats").getJSONObject(9).getString("value"));
-        /*
-        if (jsonProfile.getJSONObject("stats") != null){
-            if (jsonProfile.getJSONObject("stats").getJSONObject("p2") != null){
-                if (jsonProfile.getJSONObject("stats").getJSONObject("p2").getJSONObject("trnRating") != null){
-                    profile.setRating(jsonProfile.getJSONObject("stats").getJSONObject("p2").getJSONObject("trnRating").getString("displayValue"));
-                }
-                else{
-                    profile.setRating("N/A");
-                }
-                if (jsonProfile.getJSONObject("stats").getJSONObject("p2").getJSONObject("top1") != null){
-                    profile.setGamesWon(jsonProfile.getJSONObject("stats").getJSONObject("p2").getJSONObject("top1").getString("displayValue"));
-                }
-                else{
-                    profile.setGamesWon("N/A");
-                }
-            }
-            else{
-                profile.setRating("N/A");
-                profile.setGamesWon("N/A");
-            }
-            if (jsonProfile.getJSONObject("stats").getJSONObject("p10") != null){
-                if(jsonProfile.getJSONObject("stats").getJSONObject("p10").getJSONObject("kd") != null){
-                    profile.setKD(jsonProfile.getJSONObject("stats").getJSONObject("p10").getJSONObject("kd").getString("displayValue"));
-                }
-                else{
-                    profile.setKD("N/A");
-                }
-            }
-            else{
-                profile.setKD("N/A");
-            }
-        }
 
-
-        else{
-            profile.setRating("N/A");
-            profile.setGamesWon("N/A");
-            profile.setKD("N/A");
-        }
-        */
         return profile;
     }
 
+    /**
+     * A method to get a single FortniteProfile object from a string to show the stats.
+     *
+     * @param stringProfile the profile of the player as a string
+     * @return the profile of the player as an FortniteProfile object
+     * @throws JSONException
+     */
     public static FortniteProfile parseSingleProfile(String stringProfile) throws JSONException {
         JSONObject jsonProfile = new JSONObject(stringProfile);
 

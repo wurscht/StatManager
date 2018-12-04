@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,16 +20,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.jonas.statmanager.helper.FileManager;
 import com.example.jonas.statmanager.helper.OverwatchApiParser;
 import com.example.jonas.statmanager.model.Profile;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
+
+    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StatManager";
+    String filePath = path + "/fav.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +58,16 @@ public class DetailActivity extends AppCompatActivity {
         favorite_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavouriteActivity favorite = new FavouriteActivity();
-                favorite.saveFavorites(username, "Overwatch");
-                favorite_user.setImageResource(R.drawable.star_favorite);
+                String[] stringInput = new String[1];
+                stringInput[0] = "Fortnite;"+username;
 
+                File saveFile = new File(filePath);
+                saveFile.mkdirs();
+                FileManager.Save(saveFile, stringInput);
+
+                Toast.makeText(getApplicationContext(),"Zu Favoriten hinzugefügt", Toast.LENGTH_SHORT).show();
+
+                favorite_user.setImageDrawable(getResources().getDrawable(R.drawable.star_favorite));
             }
         });
 

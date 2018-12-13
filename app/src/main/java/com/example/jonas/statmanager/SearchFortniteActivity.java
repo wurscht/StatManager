@@ -58,7 +58,9 @@ public class SearchFortniteActivity extends AppCompatActivity {
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SearchFortniteActivity.this, FavoriteActivity.class));
+                Intent i = new Intent(SearchFortniteActivity.this, FavoriteActivity.class);
+                i.putExtra("game", "Fortnite");
+                startActivity(i);
             }
         });
     }

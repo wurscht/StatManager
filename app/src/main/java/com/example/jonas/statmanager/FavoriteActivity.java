@@ -1,5 +1,6 @@
 package com.example.jonas.statmanager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import com.example.jonas.statmanager.helper.FileManager;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Class to show the content for the favorite activity. The saved player profiles will be listed here.
@@ -20,12 +22,14 @@ import java.io.File;
 public class FavoriteActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ImageView logoBtn;
+    String game;
 
     // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
     ListView listItems;
 
-    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StatManager";
-    String filePath = path + "/fav.txt";
+    Context context;
+    String path;
+    String filePath;
 
     /**
      * Method to create the activity and initialize all the needed designs for the gui and the logic
@@ -39,17 +43,42 @@ public class FavoriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
 
+        context = getApplicationContext();
+        path = context.getFilesDir() + "/StatManager";
+        filePath = path + "/fav.txt";
+
+        Intent intent = getIntent();
+        game = intent.getStringExtra("game");
+
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
 
         File dir = new File(path);
-        File loadFile = new File(filePath);
         dir.mkdirs();
+        File loadFile = new File(filePath);
+
+        if (!loadFile.exists()) {
+            try {
+                loadFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         String[] data = FileManager.Load(loadFile);
+        String[] dataProcessed = new String[data.length];
+        for (int i =0; i < data.length; i++){
+            String[] parts = data[i].split(";");
+            if (parts[0] == game){
+                dataProcessed[i] = parts[1];
+            }
+        }
+        if (dataProcessed[0] == null){
+            dataProcessed[0] = "Für das ausgewählte Spiel sind noch keine Favoriten vorhanden";
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, data);
+                android.R.layout.simple_list_item_1, android.R.id.text1, dataProcessed);
 
         listItems = (ListView) findViewById(R.id.list_all_favorites);
         listItems.setAdapter(adapter);

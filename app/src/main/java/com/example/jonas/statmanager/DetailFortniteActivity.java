@@ -1,5 +1,6 @@
 package com.example.jonas.statmanager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.example.jonas.statmanager.model.FortniteProfile;
 import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -36,8 +38,9 @@ import java.util.Map;
  */
 public class DetailFortniteActivity extends AppCompatActivity {
     private ProgressBar progressBar;
-    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StatManager";
-    String filePath = path + "/fav.txt";
+    Context context;
+    String path;
+    String filePath;
 
     /**
      * Methode to create the activity and initialize all the needed designs for the gui and the logic
@@ -50,11 +53,15 @@ public class DetailFortniteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_fortnite);
+        context = getApplicationContext();
+        path = context.getFilesDir() + "/StatManager";
+        filePath = path + "/fav.txt";
         Intent intent = getIntent();
         final String username = intent.getStringExtra("username");
         String FortniteApiUrl = "https://api.fortnitetracker.com/v1/profile/pc/";
         progressBar = (ProgressBar)findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
+
 
         ImageView logoBtn = (ImageView)findViewById(R.id.logo);
         logoBtn.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +78,21 @@ public class DetailFortniteActivity extends AppCompatActivity {
                 String[] stringInput = new String[1];
                 stringInput[0] = "Fortnite;"+username;
 
+                File dir = new File(path);
+                boolean s = dir.mkdirs();
                 File saveFile = new File(filePath);
-                saveFile.mkdirs();
+                //saveFile.mkdirs();
+                if (!saveFile.exists()) {
+                    try {
+                        saveFile.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 FileManager.Save(saveFile, stringInput);
 
-                Toast.makeText(getApplicationContext(),"Zu Favoriten hinzugefügt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),username +" zu deinen Favoriten hinzugefügt", Toast.LENGTH_SHORT).show();
 
                 favorite_user.setImageDrawable(getResources().getDrawable(R.drawable.star_favorite));
             }

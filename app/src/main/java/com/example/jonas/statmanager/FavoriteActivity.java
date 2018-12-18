@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import com.example.jonas.statmanager.helper.FileManager;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Class to show the content for the favorite activity. The saved player profiles will be listed here.
@@ -66,15 +67,17 @@ public class FavoriteActivity extends AppCompatActivity {
         }
 
         String[] data = FileManager.Load(loadFile);
-        String[] dataProcessed = new String[data.length];
+        ArrayList<String> dataProcessed = new ArrayList<>();
         for (int i =0; i < data.length; i++){
             String[] parts = data[i].split(";");
-            if (parts[0] == game){
-                dataProcessed[i] = parts[1];
+            String gameCompare = parts[0];
+            if (game.equals(gameCompare)){
+                dataProcessed.add(parts[1]);
+
             }
         }
-        if (dataProcessed[0] == null){
-            dataProcessed[0] = "Für das ausgewählte Spiel sind noch keine Favoriten vorhanden";
+        if (dataProcessed.get(0) == null){
+            dataProcessed.set(0,"Für das ausgewählte Spiel sind noch keine Favoriten vorhanden");
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

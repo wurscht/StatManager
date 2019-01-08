@@ -68,60 +68,93 @@ public class DetailFortniteActivity extends AppCompatActivity {
         loadSpecificProfile(FortniteApiUrl + username);
 
         File loadFile = new File(filePath);
+        File dir = new File(path);
+        loadFile.mkdirs();
         String[] loadedData = FileManager.Load(loadFile);
 
+
         if (loadedData != null){
-            for (int i = 0; i < loadedData.length; i++){
-                String[] parts = loadedData[i].split(";");
-                if (parts[0].equals("Fortnite") && parts[1].equalsIgnoreCase(username)){
-                    favorite_user.setImageDrawable(getResources().getDrawable(R.drawable.star_favorite));
+            if (loadedData.length != 0){
+                for (int i = 0; i < loadedData.length; i++){
+                    String[] parts = loadedData[i].split(";");
+                    if (parts[0].equals("Fortnite") && parts[1].equalsIgnoreCase(username)){
+                        favorite_user.setImageDrawable(getResources().getDrawable(R.drawable.star_favorite));
 
-                    favorite_user.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getApplicationContext(),"Favoriten entfernen noch nicht implementiert", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    return;
-                } else{
-
-                    favorite_user.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String[] stringInput = new String[1];
-                            stringInput[0] = "Fortnite;"+usernameFinal;
-
-                            File dir = new File(path);
-                            boolean s = dir.mkdirs();
-                            File saveFile = new File(filePath);
-
-                            if (!saveFile.exists()) {
-                                try {
-                                    saveFile.createNewFile();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            } else{
-                                saveFile = saveFile.getAbsoluteFile();
-                                String[] alreadyExistingEntries = FileManager.Load(saveFile);
-                                String[] tempArray = new String[stringInput.length + alreadyExistingEntries.length];
-                                for(int i = 0; i <alreadyExistingEntries.length; i++){
-                                    tempArray[i] = alreadyExistingEntries[i];
-                                }
-                                tempArray[tempArray.length - 1] = stringInput[0];
-                                stringInput = tempArray;
+                        favorite_user.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(getApplicationContext(),"Favoriten entfernen noch nicht implementiert", Toast.LENGTH_SHORT).show();
                             }
+                        });
+                    } else{
 
-                            FileManager.Save(saveFile, stringInput);
+                        favorite_user.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String[] stringInput = new String[1];
+                                stringInput[0] = "Fortnite;"+usernameFinal;
 
-                            Toast.makeText(getApplicationContext(),usernameFinal +" zu deinen Favoriten hinzugefügt", Toast.LENGTH_SHORT).show();
+                                File dir = new File(path);
+                                boolean s = dir.mkdirs();
+                                File saveFile = new File(filePath);
 
-                            favorite_user.setImageDrawable(getResources().getDrawable(R.drawable.star_favorite));
-                            return;
-                        }
-                    });
+                                if (!saveFile.exists()) {
+                                    try {
+                                        saveFile.createNewFile();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else{
+                                    saveFile = saveFile.getAbsoluteFile();
+                                    String[] alreadyExistingEntries = FileManager.Load(saveFile);
+                                    String[] tempArray = new String[stringInput.length + alreadyExistingEntries.length];
+                                    for(int i = 0; i <alreadyExistingEntries.length; i++){
+                                        tempArray[i] = alreadyExistingEntries[i];
+                                    }
+                                    tempArray[tempArray.length - 1] = stringInput[0];
+                                    stringInput = tempArray;
+                                }
+
+                                FileManager.Save(saveFile, stringInput);
+
+                                Toast.makeText(getApplicationContext(),usernameFinal +" zu deinen Favoriten hinzugefügt", Toast.LENGTH_SHORT).show();
+
+                                favorite_user.setImageDrawable(getResources().getDrawable(R.drawable.star_favorite));
+                                return;
+                            }
+                        });
+                    }
                 }
+            }else{
+                favorite_user.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String[] stringInput = new String[1];
+                        stringInput[0] = "Fortnite;"+usernameFinal;
+
+                        File dir = new File(path);
+                        boolean s = dir.mkdirs();
+                        File saveFile = new File(filePath);
+                        if (!saveFile.exists()) {
+                            try {
+                                saveFile.createNewFile();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else{
+                            saveFile = saveFile.getAbsoluteFile();
+                        }
+
+                        FileManager.Save(saveFile, stringInput);
+
+                        Toast.makeText(getApplicationContext(),usernameFinal +" zu deinen Favoriten hinzugefügt", Toast.LENGTH_SHORT).show();
+
+                        favorite_user.setImageDrawable(getResources().getDrawable(R.drawable.star_favorite));
+                        return;
+                    }
+                });
             }
+
         } else{
             favorite_user.setOnClickListener(new View.OnClickListener() {
                 @Override

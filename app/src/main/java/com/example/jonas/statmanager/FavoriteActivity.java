@@ -76,8 +76,8 @@ public class FavoriteActivity extends AppCompatActivity {
 
             }
         }
-        if (dataProcessed.get(0) == null){
-            dataProcessed.set(0,"Für das ausgewählte Spiel sind noch keine Favoriten vorhanden");
+        if (dataProcessed.isEmpty()){
+            dataProcessed.add(0,"Für das ausgewählte Spiel sind noch keine Favoriten vorhanden");
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

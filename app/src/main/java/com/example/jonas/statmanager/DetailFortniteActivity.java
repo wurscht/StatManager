@@ -86,6 +86,7 @@ public class DetailFortniteActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Favoriten entfernen noch nicht implementiert", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        return;
                     } else{
 
                         favorite_user.setOnClickListener(new View.OnClickListener() {
